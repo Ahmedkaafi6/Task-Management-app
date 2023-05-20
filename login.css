@@ -60,7 +60,7 @@ a:hover{
   .container {
     align-items: center;
     max-width: 300px;
-    height: 325px;
+    height: 350px;
     margin: 0% auto;
     margin-top: 250px;
     padding: 20px;
@@ -118,7 +118,7 @@ a:hover{
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    margin-left: 75px;
+    margin-left: 50px;
   }
   
   .forgot-password,
