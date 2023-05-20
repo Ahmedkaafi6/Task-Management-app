@@ -1,0 +1,152 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'consolas', sans-serif;
+}
+
+
+body {
+    
+    background-color: #081b29;
+    margin: 0;
+    padding: 20px;
+  }
+  .header{
+    background: transparent;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100;
+    padding: 25px 10%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 100;
+
+}
+
+.logo{
+    margin-left:0px;
+    font-size: large;
+    color: aliceblue;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.logo::before{
+    content: '';
+    position: relative;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #00abf0;
+}
+
+a{
+    margin-left: 15px;
+    color: aliceblue;
+    font-size: large;
+    text-decoration: none;
+    font-weight: 500;
+    transition: 2s;
+    
+}
+
+a:hover{
+    background-color: #00abf0;
+    
+}
+  h1 {
+    color:#00abf0;
+    font-size: 2.5rem;
+    text-align: center;
+    margin-top: 40px;
+  }
+  
+  h2 {
+    color: #00abf0;
+    font-size: 1.8rem;
+    margin-top: 30px;
+    margin-bottom: 10px;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid #0077cc;
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+  
+  label {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  input[type="text"],
+  input[type="date"] {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  input[type="submit"] {
+    background-color: #0077cc;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+  }
+  
+  input[type="submit"]:hover {
+    background-color: #005ea6;
+  }
+  
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  label[for^="task"] {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 0;
+  }
+  
+  input[type="checkbox"] {
+    margin-right: 10px;
+  }
+  
+  button {
+    background-color: #f8f8f8;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    margin-right: 10px;
+    margin-left: 10px;
+    border-radius: 5px;
+    transition: background-color 0.2s ease-in-out;
+  }
+  
+  button:hover {
+    background-color: #e8e8e8;
+  }
+  
