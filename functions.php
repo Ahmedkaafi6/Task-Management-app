@@ -21,7 +21,7 @@ function check_login($con)
 
  
 }
-
+//Generates a random num for user id;
 function random_num($length){
     $text = "";
     if($length < 5){
