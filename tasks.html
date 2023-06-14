@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,53 +6,127 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Task Management App</title>
-	<link rel="stylesheet" href="tasks.css">
-	
+    <link rel="stylesheet" href="tasks.css">
 </head>
-<body >
-	<header class="header">
-		<a href="#" class="logo">Task Management.</a>
-	
-		<nav class="nav">
-			<a href="index.html">Home</a>
-			<a href="tasks.html">Tasks</a>
-			<a href="login.html">Login</a>
-		</nav>
-	</header> 
-	<h1>Task Management App</h1>
+<body>
+    <header class="header">
+        <a href="#" class="logo">Task Management.</a>
+    
+        <nav class="nav">
+            <a href="index.html">Home</a>
+            <a href="tasks.html">Tasks</a>
+            <a href="login.html">Login</a>
+        </nav>
+    </header> 
+    <h1>Task Management App</h1>
+    
+    <h2>Add Task</h2>
+    <form id="task-form">
+        <label for="task-name">Task Name:</label>
+        <input type="text" placeholder="Enter the task's name" id="task-name" name="task-name" required>
+        <br><br>
+        <label for="due-date">Due Date:</label>
+        <input type="date" id="due-date" name="due-date" required>
+        <br><br>
+        <input type="submit" value="Add Task">
+    </form>
+    
+    <h2>Task List</h2>
+    <ul id="task-list">
+        <li style="display: none;">
+            <input type="checkbox" id="task1" name="task1">
+            <label for="task1">Task 1</label>
+            <span class="due-date">Due Date: <input type="date" class="edit-date" value="2023-06-30"></span>
+            <button onclick="editTask(this)">Edit</button>
+            <button onclick="deleteTask(this)">Delete</button>
+        </li>
+        <li style="display: none;">
+            <input type="checkbox" id="task2" name="task2">
+            <label for="task2">Task 2</label>
+            <span class="due-date">Due Date: <input type="date" class="edit-date" value="2023-07-05"></span>
+            <button onclick="editTask(this)">Edit</button>
+            <button onclick="deleteTask(this)">Delete</button>
+        </li>
+        <li style="display: none;">
+            <input type="checkbox" id="task3" name="task3">
+            <label for="task3">Task 3</label>
+            <span class="due-date">Due Date: <input type="date" class="edit-date" value="2023-07-10"></span>
+            <button onclick="editTask(this)">Edit</button>
+            <button onclick="deleteTask(this)">Delete</button>
+        </li>
+    </ul>
 
-	<h2>Add Task</h2>
-	 <form >
-		<label for="task-name">Task Name:</label>
-		<input type="text" placeholder="Enter the task's  name" id="task-name" name="task-name">
-		<br><br>
-		<label for="due-date">Due Date:</label>
-		<input type="date" id="due-date" name="due-date">
-		<br><br>
-		<input type="submit" value="Add Task">
-	</form>
-	
-
-	<h2>Task List</h2>
-	<ul>
-		<li>
-			<input type="checkbox" id="task1" name="task1">
-			<label for="task1">Task 1</label>
-			<button>Edit</button>
-			<button>Delete</button>
-		</li>
-		<li>
-			<input type="checkbox" id="task2" name="task2">
-			<label for="task2">Task 2</label>
-			<button>Edit</button>
-			<button>Delete</button>
-		</li>
-		<li>
-			<input type="checkbox" id="task3" name="task3">
-			<label for="task3">Task 3</label>
-			<button>Edit</button>
-			<button>Delete</button>
-		</li>
-	</ul>
+    <script>
+        // JavaScript code for adding, editing, and deleting tasks
+        document.getElementById('task-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            addTask();
+        });
+    
+        function addTask() {
+            var taskName = document.getElementById('task-name').value;
+            var dueDate = document.getElementById('due-date').value;
+    
+            // Add the task to the task list
+            var taskList = document.getElementById('task-list');
+            var taskItem = document.createElement('li');
+            taskItem.innerHTML = `
+                <input type="checkbox" id="task-${taskList.childElementCount + 1}" name="task-${taskList.childElementCount + 1}">
+                <label for="task-${taskList.childElementCount + 1}">${taskName}</label>
+                <span class="due-date">Due Date: <input type="date" class="edit-date" value="${dueDate}"></span>
+                <button onclick="editTask(this)">Edit</button>
+                <button onclick="deleteTask(this)">Delete</button>
+            `;
+            taskList.appendChild(taskItem);
+    
+            // Clear the input fields
+            document.getElementById('task-name').value = '';
+            document.getElementById('due-date').value = '';
+        }
+    
+        function editTask(button) {
+            var listItem = button.parentNode;
+            var label = listItem.querySelector('label');
+            var editInput = document.createElement('input');
+            var editDate = listItem.querySelector('.edit-date');
+    
+            editInput.type = 'text';
+            editInput.value = label.textContent;
+            listItem.insertBefore(editInput, label);
+            listItem.removeChild(label);
+            button.innerText = 'Save';
+    
+            editDate.style.display = 'inline-block';
+    
+            editInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    saveTask(button);
+                }
+            });
+        }
+    
+        function saveTask(button) {
+            var listItem = button.parentNode;
+            var editInput = listItem.querySelector('input[type=text]');
+            var label = document.createElement('label');
+            var editDate = listItem.querySelector('.edit-date');
+    
+            label.textContent = editInput.value;
+            listItem.insertBefore(label, editInput);
+            listItem.removeChild(editInput);
+            button.innerText = 'Edit';
+    
+            editDate.style.display = 'none';
+        }
+    
+        function deleteTask(button) {
+            var listItem = button.parentNode;
+            var ul = listItem.parentNode;
+            ul.removeChild(listItem);
+        }
+    </script>
+    <script src="script.js"></script>
 </body>
 </html>
+
+
